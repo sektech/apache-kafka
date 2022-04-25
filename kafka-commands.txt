@@ -1,0 +1,45 @@
+NOTE : 
+- See lecture with title "Executing Kafka Commands" if you need guidance to execute commands
+- If you use windows, change the .sh extension to .bat
+
+#connect to kafka linux terminal for executing commands
+docker exec -it kafka bash
+
+# create topic t_hello
+kafka-topics.sh --bootstrap-server localhost:9092 --create --topic t_hello --partitions 1 --replication-factor 1
+
+# list topic
+kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+# describe topic
+kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic t_hello
+
+# create topic t_test
+kafka-topics.sh --bootstrap-server localhost:9092 --create --topic t_test --partitions 1 --replication-factor 1
+
+# delete topic t_test
+kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic t_test
+
+NOTE : 
+- See lecture with title "Executing Kafka Commands" if you need guidance to execute commands
+- If you use windows, change the .sh extension to .bat
+
+
+# describe consumer group (change the group name as required)
+kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group cg-dashboard --describe
+
+# reset offset of consumer group
+# topic format is topic:partition, e.g. : t_some_topic:0,2,4
+# topic format without partition (e.g. : t_my_topic) will reset all partitions
+kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group cg-dashboard --execute --reset-offsets --to-offset 10 --topic t_commodity:0
+
+NOTE : 
+- See lecture with title "Executing Kafka Commands" if you need guidance to execute commands
+- If you use windows, change the .sh extension to .bat
+
+
+# add topic
+kafka-topics.sh --bootstrap-server localhost:9092 --create --topic t_employee --partitions 1 --replication-factor 1
+
+# Kafka console consumer
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic t_employee --offset earliest --partition 0
